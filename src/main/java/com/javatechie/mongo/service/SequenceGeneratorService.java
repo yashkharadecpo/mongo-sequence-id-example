@@ -20,17 +20,16 @@ public class SequenceGeneratorService {
     private MongoOperations mongoOperations;
 
 
-    public int getSequenceNumber(String sequenceName) {
+    public int getSequenceNumber(String collectionId, String generatedIdValue, String collectionIdVal) {
         //get sequence no
-        Query query = new Query(Criteria.where("id").is(sequenceName));
+        Query query = new Query(Criteria.where(collectionId).is(collectionIdVal));
         //update the sequence no
-        Update update = new Update().inc("seq", 1);
+        Update update = new Update().inc(generatedIdValue, 1);
         //modify in document
         DbSequence counter = mongoOperations
                 .findAndModify(query,
                         update, options().returnNew(true).upsert(true),
                         DbSequence.class);
-
-        return !Objects.isNull(counter) ? counter.getSeq() : 1;
+        return Objects.isNull(counter) ? 1 : counter.getFormId();
     }
 }
