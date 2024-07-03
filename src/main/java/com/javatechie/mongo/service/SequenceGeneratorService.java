@@ -30,6 +30,6 @@ public class SequenceGeneratorService {
                 .findAndModify(query,
                         update, options().returnNew(true).upsert(true),
                         DbSequence.class);
-        return Objects.isNull(counter) ? 1 : counter.getFormId();
+        return Objects.isNull(counter) ? 1 : counter.getSeq();
     }
 }
