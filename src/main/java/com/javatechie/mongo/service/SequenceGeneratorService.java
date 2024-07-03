@@ -18,7 +18,19 @@ public class SequenceGeneratorService {
 
     @Autowired
     private MongoOperations mongoOperations;
-
+     
+     /*
+        collection_storing_db_sequence
+        ----------
+         _id (collectionId): 'user_sequence' (collectionIdVal)
+         userId: 0 (generatedIdVal)
+    */
+    /**
+     * @param collectionId 
+     * @param generatedIdValue 
+     * @param collectionIdVal 
+     * @return
+     */
 
     public int getSequenceNumber(String collectionId, String generatedIdValue, String collectionIdVal) {
         //get sequence no
